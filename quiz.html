@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <link rel="icon" href="faviconV2.png">
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Teste - Descubra seu Perfil</title>
+
+  <style>
+
+    :root {
+
+        --gradient-primary: linear-gradient(90deg, rgba(13,124,111,1) 48%, rgba(13,179,147,1) 100%);
+        --gradient-secondary: linear-gradient(90deg, rgba(13,128,113,1) 0%, rgba(13,128,113,1) 33%, rgba(117,36,114,1) 66%, rgba(117,36,114,1) 100%);
+
+        --color-primary-dark: #0D7C6F;
+        --color-primary-light: #0DB393;
+        --color-secondary-dark: #0D8071;
+        --color-secondary-light: #752472;
+
+
+      --primary-color: #0DB393;
+
+      --secondary-color: #0D7C6F;
+
+      --accent-color: #A02B80;
+
+      --light-color: #f9f9f9;
+
+      --dark-color: #2d3436;
+
+      --success-color: #00b894;
+
+      --error-color: #d63031;
+
+      --shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+      --border-radius: 12px;
+
+    }
+
+     
+
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+      transition: all 0.3s ease;
+      user-select: none;
+
+    }
+
+     
+
+    body {
+
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+      background: linear-gradient(135deg, rgba(13,128,113,1), rgba(117,36,114,1));
+
+      min-height: 100vh;
+
+      padding: 40px 20px;
+
+      color: var(--dark-color);
+
+      line-height: 1.6;
+
+    }
+
+     
+
+    .quiz-container {
+
+      max-width: 800px;
+
+      margin: 0 auto;
+
+      background-color: white;
+
+      border-radius: var(--border-radius);
+
+      padding: 40px;
+
+      box-shadow: var(--shadow);
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+     
+
+    .quiz-container::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 8px;
+
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+
+    }
+
+     
+
+    h1 {
+
+      text-align: center;
+
+      margin-bottom: 30px;
+
+      color: var(--primary-color);
+
+      font-size: 2.2rem;
+
+      position: relative;
+
+      padding-bottom: 15px;
+
+    }
+
+     
+
+    h1::after {
+
+      content: "";
+
+      position: absolute;
+
+      bottom: 0;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 60px;
+
+      height: 4px;
+
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+
+      border-radius: 2px;
+
+    }
+
+     
+
+    .question {
+
+      margin-bottom: 30px;
+
+      padding: 25px;
+
+      background-color: var(--light-color);
+
+      border-radius: var(--border-radius);
+
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+    }
+
+     
+
+    h3 {
+
+      margin-bottom: 15px;
+
+      color: var(--dark-color);
+
+      font-weight: 600;
+
+    }
+
+     
+
+    .options {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+
+    }
+
+     
+
+    .option {
+
+      padding: 15px 20px;
+
+      border: 2px solid var(--secondary-color);
+
+      border-radius: var(--border-radius);
+
+      text-align: center;
+
+      cursor: pointer;
+
+      font-weight: 500;
+
+      position: relative;
+
+      overflow: hidden;
+
+      z-index: 1;
+
+    }
+
+     
+
+    .option::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+
+      left: -100%;
+
+      width: 100%;
+
+      height: 100%;
+
+      background-color: var(--primary-color);
+
+      transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+
+      z-index: -1;
+
+    }
+
+     
+
+    .option:hover {
+
+      color: white;
+
+      border-color: var(--primary-color);
+
+    }
+
+     
+
+    .option:hover::before {
+
+      left: 0;
+
+    }
+
+     
+
+    .option.selected {
+
+      background-color: var(--primary-color);
+
+      color: white;
+
+      border-color: var(--primary-color);
+
+      transform: translateY(-2px);
+
+    }
+
+     
+
+    #submit-btn {
+
+      display: block;
+
+      width: 200px;
+
+      margin: 30px auto;
+
+      padding: 15px;
+
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+
+      color: white;
+
+      border: none;
+
+      border-radius: 50px;
+
+      cursor: pointer;
+
+      font-size: 1rem;
+
+      font-weight: 600;
+
+      letter-spacing: 1px;
+
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+
+      position: relative;
+
+      overflow: hidden;
+
+      z-index: 1;
+
+    }
+
+     
+
+    #submit-btn::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+
+      z-index: -1;
+
+      transition: opacity 0.5s ease;
+
+      opacity: 0;
+
+    }
+
+     
+
+    #submit-btn:hover::before {
+
+      opacity: 1;
+
+    }
+
+     
+
+    #submit-btn:hover {
+
+      transform: translateY(-3px);
+
+      box-shadow: 0 7px 20px rgba(108, 92, 231, 0.5);
+
+    }
+
+     
+
+    #submit-btn:active {
+
+      transform: translateY(-1px);
+
+    }
+
+     
+
+    #result {
+
+      margin-top: 30px;
+
+      text-align: center;
+
+      font-size: 1.3rem;
+
+      font-weight: 600;
+
+      padding: 20px;
+
+      border-radius: var(--border-radius);
+
+      background-color: var(--light-color);
+
+      color: var(--dark-color);
+
+      opacity: 0;
+
+      transform: translateY(20px);
+
+      transition: all 0.5s ease;
+
+    }
+
+     
+
+    #result.show {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+     
+
+    .progress {
+
+      height: 10px;
+
+      background-color: #eee;
+
+      border-radius: 5px;
+
+      margin-top: 10px;
+
+      overflow: hidden;
+
+    }
+
+     
+
+    .progress-bar {
+
+      height: 100%;
+
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+
+      width: 0;
+
+      transition: width 1s ease;
+
+    }
+
+     
+
+    @media (max-width: 600px) {
+
+      .options {
+
+        grid-template-columns: 1fr;
+
+      }
+
+       
+
+      .quiz-container {
+
+        padding: 25px;
+
+      }
+
+       
+
+      h1 {
+
+        font-size: 1.8rem;
+
+      }
+
+    }
+
+     
+
+    .notification {
+
+      position: fixed;
+
+      top: 20px;
+
+      right: 20px;
+
+      padding: 15px 25px;
+
+      background-color: var(--success-color);
+
+      color: white;
+
+      border-radius: var(--border-radius);
+
+      box-shadow: var(--shadow);
+
+      transform: translateX(150%);
+
+      transition: transform 0.5s ease;
+
+      z-index: 1000;
+
+    }
+
+     
+
+    .notification.show {
+
+      transform: translateX(0);
+
+    }
+
+     
+
+    .question-number {
+
+      display: inline-block;
+
+      width: 30px;
+
+      height: 30px;
+
+      background-color: var(--primary-color);
+
+      color: white;
+
+      border-radius: 50%;
+
+      text-align: center;
+
+      line-height: 30px;
+
+      margin-right: 10px;
+
+    }
+
+    .result-message {
+  margin-bottom: 30px;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.score-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .score-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+}
+
+.score-item {
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.score-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--dark-color);
+  font-weight: 500;
+}
+
+#restart-btn {
+  display: block;
+  width: 200px;
+  margin: 30px auto;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(13, 124, 111, 0.4);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#restart-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+#restart-btn:hover::before {
+  opacity: 1;
+}
+
+#restart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(13, 124, 111, 0.5);
+}
+
+#restart-btn:active {
+  transform: translateY(-1px);
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  max-width: 400px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  animation: modalAppear 0.3s ease;
+}
+
+@keyframes modalAppear {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+.modal h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.modal p {
+  margin-bottom: 25px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#cancel-btn {
+  background-color: #eee;
+  border: none;
+  color: var(--dark-color);
+}
+
+#cancel-btn:hover {
+  background-color: #ddd;
+}
+
+#confirm-btn {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  border: none;
+  color: white;
+}
+
+#confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="quiz-container">
+
+    <h1>Conte um Pouco Sobre Você</h1>
+
+    <div id="quiz"></div>
+
+    <button id="submit-btn">Verificar Respostas</button>
+
+    <div id="result"></div>
+
+    <div id="confirmation-modal" class="modal">
+      <div class="modal-content">
+        <h3>Tem certeza?</h3>
+        <p>Ao refazer o teste, você perderá seu resultado atual.</p>
+        <div class="modal-buttons">
+          <button id="cancel-btn">Cancelar</button>
+          <button id="confirm-btn">Sim, refazer</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+
+
+  <script>
+
+    const quizData = [
+    {
+        question: "Você prefere um dia na escola onde as aulas seguem",
+        options: [
+        { text: "Programação fixa", value: 1 },
+        { text: "Atividades variadas e inesperadas", value: 2 }
+        ]
+    },
+    {
+        question: "Em uma festa, você se sente mais energizado",
+        options: [
+        { text: "Conversando com várias pessoas", value: 3 },
+        { text: "Encontrando um cantinho tranquilo", value: 4 }
+        ]
+    },
+    {
+        question: "Você prefere participar de uma competição com",
+        options: [
+        { text: "Regras claras e preparação previsível", value: 1 },
+        { text: "Novos desafios inesperados", value: 2 }
+        ]
+    },
+    {
+        question: "Você acha mais divertido",
+        options: [
+        { text: "Participar de uma grande festa ou evento", value: 3 },
+        { text: "Uma noite jogando videogame ou assistindo a uma série", value: 4 }
+        ]
+    },
+    {
+        question: "Durante o intervalo na escola, você prefere passar o tempo com",
+        options: [
+        { text: "Grande grupo de amigos", value: 3 },
+        { text: "Um ou dois amigos próximos", value: 4 }
+        ]
+    },
+    {
+        question: "Durante as férias escolares, você prefere ter",
+        options: [
+        { text: "Cronograma bem planejado", value: 1 },
+        { text: "Férias livres para decidir na hora", value: 2 }
+        ]
+    },
+    {
+        question: "Você prefere",
+        options: [
+        { text: "Atividades em grupo", value: 3 },
+        { text: "Atividades individuais", value: 4 }
+        ]
+    },
+    {
+        question: "Quando se trata de projetos escolares, você prefere aqueles com",
+        options: [
+        { text: "Cronograma claro e etapas definidas", value: 1 },
+        { text: "Liberdade para explorar e criar", value: 2 }
+        ]
+    },
+    {
+        question: "Quando você está em um ambiente novo, você se sente mais confortável",
+        options: [
+        { text: "Iniciando conversas com estranhos", value: 3 },
+        { text: "Observando e esperando", value: 4 }
+        ]
+    },
+    {
+        question: "Na sua rotina diária, você prefere",
+        options: [
+        { text: "Ter horários fixos para cada atividade", value: 1 },
+        { text: "Ser mais flexível e decidir na hora", value: 2 }
+        ]
+    },
+    {
+        question: "Você prefere passar um fim de semana",
+        options: [
+        { text: "Saindo com amigos em eventos sociais", value: 3 },
+        { text: "Relaxando em casa com um bom livro ou filme", value: 4 }
+        ]
+    },
+    {
+        question: "Quando você está aprendendo algo novo, você prefere seguir",
+        options: [
+        { text: "Livro didático com exercícios estruturados", value: 1 },
+        { text: "Experimentos e desafios práticos", value: 2 }
+        ]
+    },
+    {
+        question: "Quando você precisa recarregar as energias, você prefere",
+        options: [
+        { text: "Estar rodeado de pessoas", value: 3 },
+        { text: "Ficar sozinho", value: 4 }
+        ]
+    },
+    {
+        question: "Você acha mais interessante participar de um clube escolar que tem",
+        options: [
+        { text: "Encontros regulares e atividades planejadas", value: 1 },
+        { text: "Eventos diferentes a cada semana", value: 2 }
+        ]
+    },
+    {
+        question: "Se você pudesse escolher, preferiria participar de um",
+        options: [
+        { text: "Clube de debate", value: 3 },
+        { text: "Clube de leitura", value: 4 }
+        ]
+    },
+    {
+        question: "Em um dia de folga, você se sentiria mais feliz",
+        options: [
+        { text: "Planejando um passeio com muitos amigos", value: 3 },
+        { text: "Explorando um hobby ou um novo livro sozinho", value: 4 }
+        ]
+    },
+    {
+        question: "Você prefere passar suas tardes depois da escola",
+        options: [
+        { text: "Numa rotina fixa de tarefas e estudos", value: 1 },
+        { text: "Explorando novos hobbies e interesses", value: 2 }
+        ]
+    },
+    {
+        question: "Em projetos escolares, você prefere",
+        options: [
+        { text: "Trabalhar em grupo", value: 3 },
+        { text: "Trabalhar sozinho", value: 4 }
+        ]
+    },
+    {
+        question: "Você se sente mais motivado a estudar quando tem",
+        options: [
+        { text: "Plano de estudo fixo", value: 1 },
+        { text: "Diferentes métodos e atividades", value: 2 }
+        ]
+    },
+    {
+        question: "Se você pudesse escolher, você preferiria um emprego de meio período",
+        options: [
+        { text: "Tarefas rotineiras e previsíveis", value: 1 },
+        { text: "Diferentes tarefas e desafios", value: 2 }
+        ]
+    }
+    ];
+
+
+    const quizContainer = document.getElementById('quiz');
+
+    const submitButton = document.getElementById('submit-btn');
+
+    const resultContainer = document.getElementById('result');
+
+    const notification = document.getElementById('notification');
+
+
+
+    function showNotification(message) {
+
+      notification.textContent = message;
+
+      notification.classList.add('show');
+
+       
+
+      setTimeout(() => {
+
+        notification.classList.remove('show');
+
+      }, 3000);
+
+    }
+
+
+
+    function buildQuiz() {
+  quizData.forEach((questionData, index) => {
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+    
+    const questionTitle = document.createElement('h3');
+    questionTitle.innerHTML = `<span class="question-number">${index + 1}</span> ${questionData.question}`;
+    questionDiv.appendChild(questionTitle);
+
+    const optionsDiv = document.createElement('div');
+    optionsDiv.classList.add('options');
+
+    questionData.options.forEach((option, optionIndex) => {
+      const optionElement = document.createElement('div');
+      optionElement.classList.add('option');
+      optionElement.textContent = option.text; // Alterado para option.text
+      optionElement.setAttribute('data-question', index);
+      optionElement.setAttribute('data-option', optionIndex);
+      optionElement.setAttribute('data-value', option.value); // Adicionado para armazenar o valor
+
+      optionElement.addEventListener('click', function() {
+        const questionOptions = document.querySelectorAll(`.option[data-question="${index}"]`);
+        questionOptions.forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        showNotification('Resposta selecionada!');
+      });
+
+      optionsDiv.appendChild(optionElement);
+    });
+
+    questionDiv.appendChild(optionsDiv);
+    quizContainer.appendChild(questionDiv);
+  });
+}
+
+
+
+function calculateScore() {
+  let answered = 0;
+  // Contadores para cada tipo de valor
+  let counts = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0
+  };
+  
+  quizData.forEach((questionData, index) => {
+    const selectedOption = document.querySelector(`.option[data-question="${index}"].selected`);
+    
+    if (selectedOption) {
+      answered++;
+      const value = parseInt(selectedOption.getAttribute('data-value'));
+      counts[value]++;
+    }
+  });
+  
+  // Transformar o objeto de contagens em array para ordenação
+  let valueEntries = Object.entries(counts); // [["1", 5], ["2", 3], etc.]
+  valueEntries.sort((a, b) => b[1] - a[1]); // Ordenar por contagem (decrescente)
+  
+  // Encontrar os valores mais frequentes
+  let maxCount = valueEntries[0][1];
+  
+  // Obter todos os valores com contagem máxima (para caso de empate)
+  let topValues = valueEntries
+    .filter(entry => entry[1] === maxCount)
+    .map(entry => parseInt(entry[0]));
+  
+  // Se só temos um valor no topo, adicionamos o segundo mais votado
+  if (topValues.length === 1) {
+    topValues.push(parseInt(valueEntries[1][0]));
+    
+    // Verificar se há empate na segunda posição
+    if (valueEntries.length > 2 && valueEntries[1][1] === valueEntries[2][1]) {
+      topValues.push(parseInt(valueEntries[2][0]));
+      
+      // Verificar se há empate também na terceira posição
+      if (valueEntries.length > 3 && valueEntries[2][1] === valueEntries[3][1]) {
+        topValues.push(parseInt(valueEntries[3][0]));
+      }
+    }
+  }
+  
+  // Ordenar os valores para consistência
+  topValues.sort();
+  
+  // Para o caso em que todos os valores têm a mesma quantidade
+  const allEqual = valueEntries.every(entry => entry[1] === valueEntries[0][1]);
+  
+  return { 
+    counts, 
+    topValues, 
+    answered, 
+    allEqual,
+    pattern: topValues.join(" - ") // Para facilitar a identificação do padrão
+  };
+}
+
+submitButton.addEventListener('click', function() {
+  const { counts, topValues, answered, allEqual, pattern } = calculateScore();
+  const totalQuestions = quizData.length;
+  
+  if (answered < totalQuestions) {
+    showNotification(`Responda todas as perguntas! (${answered}/${totalQuestions})`);
+    return;
+  }
+  
+  let title = '';
+  let message = 'Resultado baseado nos seus valores mais escolhidos.';
+  
+  // Definir título com base nas combinações
+  if (allEqual || topValues.length === 4) {
+    title = "🌟 Perfil Equilibrado: Rotina, Desafio, Grupo e Sozinho";
+    message = "Você possui um perfil completo e adaptável, conseguindo se encaixar em qualquer ambiente. Sabe equilibrar desafios com estabilidade, valoriza tanto a autonomia quanto o trabalho em equipe e se sente confortável em rotinas bem estruturadas, mas também adora uma dose de inovação. Sua versatilidade te torna um grande solucionador de problemas e alguém que pode se destacar em diversas áreas."
+  }  // Combinações de 2 valores
+  else if (topValues.length === 2) {
+    if (topValues[0] === 1 && topValues[1] === 2) {
+      title = "⏱️🔥 Rotina & Desafio";
+      message = "Você combina o melhor dos dois mundos: disciplina e ousadia. Gosta de um planejamento bem feito, mas também sente prazer em enfrentar novos desafios. Para você, crescer exige equilíbrio entre constância e superação, garantindo que tudo esteja sob controle, mas sem perder a emoção de buscar novos objetivos."
+    } 
+    else if (topValues[0] === 1 && topValues[1] === 3) {
+      title = "⏱️👥 Rotina & Grupo";
+      message = "Organização e colaboração são seus pontos fortes. Você prefere ambientes estáveis, onde cada um tem seu papel bem definido e o trabalho em equipe é essencial. Sabe que o sucesso vem da soma de esforços e acredita que processos bem estruturados fazem toda a diferença para um bom desempenho."
+    } 
+    else if (topValues[0] === 1 && topValues[1] === 4) {
+      title = "⏱️🧘 Rotina & Sozinho";
+      message = "Você se sente mais produtivo quando pode seguir uma rotina bem organizada sem distrações. Prefere trabalhar no seu próprio ritmo, garantindo que tudo saia conforme o planejado. Sua disciplina e foco fazem de você uma pessoa confiável e eficiente, sempre buscando aperfeiçoamento constante."
+    } 
+    else if (topValues[0] === 2 && topValues[1] === 3) {
+      title = "🔥👥 Desafio & Grupo";
+      message = "Você é movido pela energia do trabalho em equipe e pela emoção de enfrentar desafios. Acredita que superar obstáculos ao lado de outras pessoas é mais enriquecedor e motivador. Você gosta de inovação, de ação e de ambientes dinâmicos, onde pode contribuir ativamente para o sucesso do grupo."
+    } 
+    else if (topValues[0] === 2 && topValues[1] === 4) {
+      title = "🔥🧘 Desafio & Sozinho";
+      message = "Você é um aventureiro independente, sempre buscando superar seus próprios limites. Para você, desafios são uma jornada pessoal, onde pode testar sua inteligência e criatividade sem depender de ninguém. Seu espírito inovador e resiliente faz com que você busque sempre novas soluções para os problemas."
+    } 
+    else if (topValues[0] === 3 && topValues[1] === 4) {
+      title = "👥🧘 Grupo & Sozinho";
+      message = "Você transita entre o trabalho em equipe e a introspecção, sabendo aproveitar os dois momentos da melhor maneira possível. Embora goste de colaborar com outras pessoas, também valoriza seu espaço para pensar e agir por conta própria. Sua flexibilidade permite que você se adapte a diferentes contextos com facilidade."
+    }
+  } 
+  // Combinações de 3 valores
+  else if (topValues.length === 3) {
+    if (topValues[0] === 1 && topValues[1] === 2 && topValues[2] === 3) {
+      title = "⏱️🔥👥 Rotina, Desafio & Grupo";
+      message = "Você é alguém que gosta de planejamento, mas não tem medo de desafios e valoriza o poder do grupo. Consegue equilibrar momentos de estabilidade com situações de superação e acredita que o trabalho em equipe é fundamental para alcançar grandes resultados. Seu perfil combina estratégia, ação e colaboração."
+    } 
+    else if (topValues[0] === 1 && topValues[1] === 2 && topValues[2] === 4) {
+      title = "⏱️🔥🧘 Rotina, Desafio & Sozinho";
+      message = "Você mescla disciplina, ousadia e independência. Gosta de seguir um planejamento bem estruturado, mas também sente prazer em enfrentar desafios sozinho. Sua capacidade de equilibrar constância e inovação faz com que você seja extremamente focado e eficiente, sempre pronto para resolver qualquer problema."
+    } 
+    else if (topValues[0] === 1 && topValues[1] === 3 && topValues[2] === 4) {
+      title = "⏱️👥🧘 Rotina, Grupo & Sozinho";
+      message = "Você valoriza um ambiente organizado e estruturado, mas também se sente confortável tanto em equipe quanto sozinho. Consegue se adaptar bem a diferentes dinâmicas, alternando momentos de colaboração com períodos de concentração individual. Seu equilíbrio entre socialização e introspecção faz de você alguém muito versátil."
+    } 
+    else if (topValues[0] === 2 && topValues[1] === 3 && topValues[2] === 4) {
+      title = "🔥👥🧘 Desafio, Grupo & Sozinho";
+      message = "Você gosta de desafios, se sente bem em equipe, mas também aprecia sua independência. Consegue trabalhar com outras pessoas para alcançar grandes objetivos, mas também não tem problema em assumir responsabilidades por conta própria. Sua flexibilidade permite que você transite entre diferentes cenários sem dificuldade."
+    }
+  }
+  
+  resultContainer.innerHTML = `
+    <h2>Resultado!</h2>
+    <h2>${title}</h2>
+    <p class="result-message">${message}</p>
+    <div class="score-details">
+      <p class="score-title">Distribuição detalhada:</p>
+      <div class="score-grid">
+        <div class="score-item">
+          <div class="score-value">${counts[1]}</div>
+          <div class="score-label">Rotina</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value">${counts[2]}</div>
+          <div class="score-label">Desafios</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value">${counts[3]}</div>
+          <div class="score-label">Grupo</div>
+        </div>
+        <div class="score-item">
+          <div class="score-value">${counts[4]}</div>
+          <div class="score-label">Sozinho</div>
+        </div>
+      </div>
+    </div>
+    <button id="restart-btn">Refazer Teste</button>
+  `;
+  
+  document.getElementById('restart-btn').addEventListener('click', function() {
+  // Em vez de recarregar imediatamente, mostrar o modal de confirmação
+  document.getElementById('confirmation-modal').classList.add('show');
+});
+
+// Adicionar os event listeners para os botões do modal
+document.getElementById('cancel-btn').addEventListener('click', function() {
+  // Apenas fechar o modal quando "Cancelar" for clicado
+  document.getElementById('confirmation-modal').classList.remove('show');
+});
+
+document.getElementById('confirm-btn').addEventListener('click', function() {
+  // Fechar o modal
+  document.getElementById('confirmation-modal').classList.remove('show');
+  
+  // Rolar para o topo
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+  
+  // Recarregar a página após a rolagem terminar
+  setTimeout(function() {
+    location.reload();
+  }, 500);
+});
+  
+  resultContainer.classList.add('show');
+  resultContainer.scrollIntoView({ behavior: 'smooth' });
+});
+
+
+    buildQuiz();
+
+  </script>
+
+</body>
+
+</html>

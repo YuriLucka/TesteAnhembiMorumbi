@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="icon" href="faviconV2.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste - Descubra seu Perfil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            user-select: none;
+        }
+        
+        body {
+            background: linear-gradient(140deg, rgba(13,124,111,1) 48%, rgba(13,179,147,1) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 30px 15px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+        
+        .college-name {
+            color: #F9B233;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+        
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .description {
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        
+        .qr-container {
+            width: min(200px, 80vw);
+            height: min(200px, 80vw);
+            background-color: #F7A532;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-placeholder {
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .qr-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .btn-start {
+            border-radius: 16px;
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            margin-top: 20px;
+            line-height: 1.3;
+            padding: 10px min(30px, 8vw);
+            background-color: #F7A532;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            width: fit-content;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-start:hover, .btn-start:active {
+            background-color: #951B81;
+            transform: translateY(-2px);
+        }
+        
+        .or-divider {
+            margin: 10px 0;
+            font-size: clamp(0.8rem, 2.5vw, 1.1rem);
+            word-break: break-all;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .or-divider {
+                font-size: 0.8rem;
+            }
+            
+            .btn-start {
+                padding: 12px 25px;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            body {
+                justify-content: flex-start;
+                padding-top: 30px;
+            }
+            
+            .qr-container {
+                width: min(150px, 60vw);
+                height: min(150px, 60vw);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Descubra seu Perfil Profissional</h1>
+        <div class="college-name">ANHEMBI MORUMBI - CAMPUS ATHON SOROCABA</div>
+        
+        <div class="content">
+            <!-- <p class="description">Faça nosso quiz e descubra qual área profissional combina mais com o seu perfil. Uma análise personalizada para orientar seus próximos passos na carreira!</p> -->
+            
+            <div class="qr-container">
+                <div class="qr-placeholder">
+                    <img src="qrCode1.svg" alt="QR Code para o Quiz">
+                </div>
+            </div>
+            
+            <div class="or-divider">https://yurilucka.github.io/TesteAnhembiMorumbi/quiz.html</div>
+            
+            <a href="quiz.html" class="btn-start">INICIAR TESTE</a>
+        </div>
+    </div>
+
+    <script>
+        // Script para redirecionar ao quiz quando o botão for clicado
+        document.querySelector('.btn-start').addEventListener('click', function(e) {
+            // Permitir o comportamento padrão de navegação do link
+            // Não é necessário preventDefault() aqui pois já temos href definido
+        });
+        
+        // Ajustar URL para melhor visualização em dispositivos pequenos
+        const updateURLDisplay = () => {
+            const urlText = document.querySelector('.or-divider');
+            if (window.innerWidth < 360 && urlText.textContent.length > 30) {
+                const fullURL = urlText.textContent;
+                // Adiciona quebra se necessário para telas muito pequenas
+                if (fullURL.includes('/')) {
+                    const parts = fullURL.split('/');
+                    urlText.innerHTML = parts.slice(0, -1).join('/') + '/<br>' + parts[parts.length - 1];
+                }
+            }
+        };
+        
+        window.addEventListener('load', updateURLDisplay);
+        window.addEventListener('resize', updateURLDisplay);
+    </script>
+</body>
+</html>
