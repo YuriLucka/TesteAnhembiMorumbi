@@ -282,7 +282,7 @@
 
      
 
-    #submit-btn {
+    #submit-btn, #start-btn {
 
       display: block;
 
@@ -320,7 +320,7 @@
 
      
 
-    #submit-btn::before {
+    #submit-btn::before , #start-btn::before {
 
       content: "";
 
@@ -346,7 +346,7 @@
 
      
 
-    #submit-btn:hover::before {
+    #submit-btn:hover::before , #start-btn:hover::before {
 
       opacity: 1;
 
@@ -354,7 +354,7 @@
 
      
 
-    #submit-btn:hover {
+    #submit-btn:hover , #start-btn:hover {
 
       transform: translateY(-3px);
 
@@ -364,7 +364,7 @@
 
      
 
-    #submit-btn:active {
+    #submit-btn:active , #start-btn:active {
 
       transform: translateY(-1px);
 
@@ -726,7 +726,7 @@ h2 {
 
     <button id="submit-btn">Verificar Respostas</button>
 
-    <div id="result"></div>
+    <div id="result" style="text-align: justify;"></div>
 
     <div id="confirmation-modal" class="modal">
       <div class="modal-content">
@@ -735,6 +735,16 @@ h2 {
         <div class="modal-buttons">
           <button id="cancel-btn">Cancelar</button>
           <button id="confirm-btn">Sim, refazer</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="intro-modal" class="modal show">
+      <div class="modal-content" style="text-align: justify;">
+        <h3 style="text-align: center;">Método Janela MPT</h3>
+        <p>O Método da Janela MTP é uma técnica útil para ajudar na escolha de carreira, para aqueles estudantes que estão muito indecisos. Ele se concentra no cruzamento de duas dimensões principais: traços de personalidade e motivação. Traços de personalidade referem-se à preferência de uma pessoa por trabalhar em atividades individuais ou em grupo, enquanto a motivação analisa se a pessoa é mais estimulada por atividades novas e desafiadoras ou por tarefas repetitivas e rotineiras. Ao combinar essas características, o método forma quatro quadrantes, cada um representando perfis profissionais distintos, como se fossem diferentes vidros de uma janela. Responda as questões com sinceridade e ao final observe, nas respostas, os dois quadrantes nos quais obteve maior pontuação.</p>
+        <div class="modal-buttons">
+          <button id="start-btn">Começar Teste</button>
         </div>
       </div>
     </div>
@@ -1142,6 +1152,17 @@ document.getElementById('confirm-btn').addEventListener('click', function() {
 
 
     buildQuiz();
+
+    document.addEventListener('DOMContentLoaded', function() {
+  // Mostrar o modal de introdução quando a página carregar
+  const introModal = document.getElementById('intro-modal');
+  introModal.classList.add('show');
+  
+  // Adicionar evento ao botão de começar
+  document.getElementById('start-btn').addEventListener('click', function() {
+    introModal.classList.remove('show');
+  });
+});
 
   </script>
 
